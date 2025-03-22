@@ -22,7 +22,7 @@ pipeline {
 
         stage('Serve Frontend Locally') {
             steps {
-                bat 'start npm start'
+                bat 'start /B npm start'
             }
         }
 
