@@ -1,0 +1,47 @@
+<div class="container">
+  <h2 class="title">User Management</h2>
+
+  <!-- Search User by ID -->
+  <div class="search-section">
+    <label for="userId">Enter User ID:</label>
+    <input id="userId" type="number" [(ngModel)]="userId" class="input-field" placeholder="Enter User ID">
+    <button (click)="getUser()" class="button">Find User</button>
+  </div>
+
+  <div *ngIf="selectedUser" class="user-details">
+    <h3>Found User</h3>
+    <p><strong>ID:</strong> {{ selectedUser.id }}</p>
+    <p><strong>Username:</strong> {{ selectedUser.username }}</p>
+    <p><strong>Email:</strong> {{ selectedUser.email }}</p>
+    <button (click)="updateUser()" class="button">Update User</button>
+    <button (click)="deleteUser(selectedUser.id)" class="button delete-button">Delete User</button>
+  </div>
+
+  <hr>
+
+  <!-- Get All Users -->
+  <div class="load-users">
+    <button (click)="getAllUsers()" class="button load-button">Load All Users</button>
+  </div>
+
+  <ul *ngIf="users.length > 0" class="user-list">
+    <li *ngFor="let user of users" class="user-item">
+      {{ user.id }} - {{ user.username }} ({{ user.email }})
+      <button (click)="deleteUser(user.id)" class="button delete-button">Delete</button>
+    </li>
+  </ul>
+
+  <hr>
+
+  <!-- Create User -->
+  <div class="create-user">
+    <h3>Add New User</h3>
+    <label>Username:</label>
+    <input type="text" [(ngModel)]="newUser.username" class="input-field" placeholder="Enter Username">
+    <label>Email:</label>
+    <input type="email" [(ngModel)]="newUser.email" class="input-field" placeholder="Enter Email">
+    <button (click)="createUser()" class="button">Create User</button>
+  </div>
+
+  <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+</div>
