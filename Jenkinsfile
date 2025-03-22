@@ -24,7 +24,7 @@ pipeline {
             steps {
                 script {
                     // Serve the production build on port 4200 using http-server
-                    bat 'npx http-server dist/user-management-frontend -p 4200 &'
+                    bat 'npm start'
                 }
             }
         }
