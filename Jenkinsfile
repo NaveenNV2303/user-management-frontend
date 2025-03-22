@@ -1,43 +1,43 @@
 pipeline {
     agent any
 
+    environment {
+        // Define any environment variables if needed
+    }
+
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/NaveenNV2303/user-management-frontend.git'
+                git 'https://github.com/NaveenNV2303/user-management-frontend'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                script {
-                    sh 'npm install'  // Install frontend dependencies
-                }
+                bat 'npm install'
             }
         }
 
         stage('Build') {
             steps {
-                script {
-                    sh 'ng build --prod'  // Build the frontend
-                }
+                bat 'npm run build'
             }
         }
 
         stage('Serve Frontend Locally') {
             steps {
-                script {
-                    // Serve the frontend locally (ensure this doesn't conflict with other processes)
-                    sh 'ng serve --host 0.0.0.0 --port 4200'  // Make it accessible on port 4200
-                }
+                bat 'npm start'
+            }
+        }
+
+        stage('Post Actions') {
+            steps {
+                echo 'Frontend build finished!'
             }
         }
     }
 
     post {
-        success {
-            echo 'Frontend build and local serve completed successfully!'
-        }
         failure {
             echo 'Frontend build failed'
         }
