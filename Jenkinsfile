@@ -14,15 +14,18 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build Production') {
             steps {
-                bat 'npm run build'
+                bat 'npm run build -- --prod'  // Build the application for production
             }
         }
 
         stage('Serve Frontend Locally') {
             steps {
-                bat 'start cmd /k "npm start"'
+                script {
+                    // Serve the production build on port 4200 using http-server
+                    bat 'npx http-server dist/user-management-frontend -p 4200 &'
+                }
             }
         }
 
