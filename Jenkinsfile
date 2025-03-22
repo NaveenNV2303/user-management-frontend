@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/NaveenNV2303/user-management-frontend'
+                git branch: 'main', url: 'https://github.com/NaveenNV2303/user-management-frontend'
             }
         }
 
