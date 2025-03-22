@@ -23,6 +23,7 @@ pipeline {
         stage('Serve Frontend Locally') {
             steps {
                 bat 'start /B npm start'
+                bat 'timeout /t 10 /nobreak'
             }
         }
 
